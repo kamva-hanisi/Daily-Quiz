@@ -1,3 +1,4 @@
+import { router } from "expo-router";
 import { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
@@ -47,6 +48,16 @@ export default function QuizScreen() {
 
   const handleNext = () => {
     if (isLastQuestion) {
+      const finalScore =
+        score + (selectedAnswer === question.correctAnswer ? 1 : 0);
+
+      router.push({
+        pathname: "/quiz/result",
+        params: {
+          score: finalScore.toString(),
+        },
+      });
+
       return;
     }
 
